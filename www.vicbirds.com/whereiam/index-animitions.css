@@ -1,0 +1,117 @@
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#banner_content p {
+    opacity: 0;
+    animation: fade-in 4s ease 0s 1;
+    -webkit-animation: fade-in 4s ease 0s 1;
+    -moz-animation: fade-in 4s ease 0s 1;
+    -o-animation: fade-in 4s ease 0s 1;
+    -ms-animation: fade-in 4s ease 0s 1;
+
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+}
+
+#banner_content h1 {
+    opacity: 0;
+    animation: fade-in 4s ease 0s 1;
+    -webkit-animation: fade-in 4s ease 0s 1;
+    -moz-animation: fade-in 4s ease 0s 1;
+    -o-animation: fade-in 4s ease 0s 1;
+    -ms-animation: fade-in 4s ease 0s 1;
+
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+}
+
+#btn1 {
+    opacity: 0;
+    animation: fade-in 4s ease 0s 1;
+    -webkit-animation: fade-in 4s ease 0s 1;
+    -moz-animation: fade-in 4s ease 0s 1;
+    -o-animation: fade-in 4s ease 0s 1;
+    -ms-animation: fade-in 4s ease 0s 1;
+
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+}
+
+.shift2a {
+    opacity: 0;
+    animation: fade-in 6s ease 0s 1;
+    -webkit-animation: fade-in 6s ease 0s 1;
+    -moz-animation: fade-in 6s ease 0s 1;
+    -o-animation: fade-in 6s ease 0s 1;
+    -ms-animation: fade-in 6s ease 0s 1;
+
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+}
+
+@keyframes wrapper-gradient {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#sustext {
+    animation: wrapper-gradient 1s linear;
+}

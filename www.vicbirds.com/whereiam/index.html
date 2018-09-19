@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Where I am - Vicbirds.com - Saving the Hooded Plovers</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <link rel="stylesheet" href="index.css" type="text/css">
+    <link rel="stylesheet" href="index-animitions.css" type="text/css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/jsCalendar.css">
+    <script type="text/javascript" src="js/jsCalendar.js"></script>
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            function isMobile() {
+                if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)))
+                    return true;
+                else
+                    return false;
+            }
+
+            if (isMobile() !== false)
+                window.location.href = "index-m.html";
+
+        }
+    </script>
+</head>
+<header>
+    <nav>
+        <a href="http://www.vicbirds.com"> <img src="img/logoVB-copy.png"></a>
+
+    </nav>
+</header>
+<body>
+<img id="loading" src="img/loading_gif.gif">
+<div id="banner">
+
+    <img id="back" src="img/great-ocean-road-sunset.jpg">
+    <div id="banner_content">
+
+        <p>Story continued..</p>
+        <h1>Now You Know Who Am I.
+            Do You Wonder Where Do I Live?</h1>
+        <p>On your feet, head to south, far away from busy Melbourne CBD, until you see the long sandy beach. We wait
+            for you there!</p>
+        <a id="btn1">COME TO MY HOME</a>
+
+    </div>
+</div>
+
+<div id="shift1">
+    <p id="shift2" class="shift2">"...If you are on the way to 12 Apostles. Don't forget to visit our home in Lorne to
+        Princetown area..."
+    </p>
+</div>
+
+<div id="select">
+    <img id='youwanttosee' src="img/You-want-to-see.png">
+    <table>
+        <tr>
+            <td><img src="img/myWholeFamily.png" id="all"></td>
+            <td><img src="img/newSpottedThisWeek.png" id="week"></td>
+        </tr>
+
+        <tr>
+            <td><img src="img/oldMenOnly.png" id="old"></td>
+            <td><img src="img/newSpottedThisMonth.png" id="month"></td>
+
+        </tr>
+        <tr>
+            <td><img src="img/OurKidOnly.png" id="kid"></td>
+            <td><img src="img/newSpottedThisYear.png" id="year"></td>
+
+        </tr>
+
+        <tr>
+            <td><img src="img/OurNestOnly.png" id="nest"></td>
+        </tr>
+    </table>
+</div>
+
+<div id="map">
+</div>
+
+<div id="shift3">
+    <div id="sustext">
+        <p>"...Beautiful things worth to be shared! If you see me somewhere,please let everybody know..."</p>
+    </div>
+</div>
+
+<div id="hoodchoose">
+    <img src="img/what-did-you-see.png">
+    <div id="hc">
+        <img id="oldbird" class="oldbird" src="img/spottedAdult.png">
+        <img id="chickbird" class="chickbird" src="img/spottedChick.png">
+        <img id="eggbird" class="eggbird" src="img/spottedNest.png">
+
+    </div>
+</div>
+
+<div id="reportarea">
+    <div id="map2"></div>
+    <div id="wdsf"><img id="wds" src="img/Where-did-you-see.png"></div>
+</div>
+
+<div id="mapanddate">
+
+    <div id="myCalendar"></div>
+
+    <div id="finalshare">
+        <div id="whensee"><img src="img/When-did-you-see.png"></div>
+        <div id="fsharebtn"><img id="sharebtn" src="img/confirmShare.png"></div>
+    </div>
+</div>
+
+<!--
+<div id="temparea">
+    <div id="date">
+        <p>Pick a location and a date you have seen hooded plovers before</p>
+        <input id='mm' type="date" max=''>
+        <br>
+        <br>
+        <br>
+        <br>
+        <img id="sharebtn" src="img/shareButton.png">
+    </div>
+</div>
+-->
+
+<footer>
+</footer>
+<script>
+    var map, infoWindow, geocoder, map2;
+    var add = 'address';
+    var markers = [];
+    var markers2 = [];
+
+    function initMap() {
+        geocoder = new google.maps.Geocoder();
+
+
+        var styledMapType = new google.maps.StyledMapType(
+            [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#242f3e"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#746855"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#242f3e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.locality",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#263c3f"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#6b9a76"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#38414e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#212a37"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#9ca5b3"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#746855"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#1f2835"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#f3d19c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#2f3948"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#17263c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#515c6d"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#17263c"
+                        }
+                    ]
+                }
+            ], {name: 'Bird Map'}
+        )
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -38.667, lng: 143.604},
+            zoom: 11,
+            zoomControl: false,
+            gestureHandling: 'none',
+            streetViewControl: false,
+            mapTypeControlOptions: {
+                mapTypeIds: ['Bird Map', 'satellite'
+                ]
+            }
+        });
+
+        map2 = new google.maps.Map(document.getElementById('map2'), {
+            center: {lat: -38.667, lng: 143.604},
+            zoom: 10,
+            mapTypeControlOptions: {
+                mapTypeIds: ['Bird Map', 'satellite'
+                ]
+            }
+        });
+
+
+        google.maps.event.addListener(map2, 'click', function (event) {
+
+            clearMarkers2();
+            if (check() == true) {
+                //alert('Yes');
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
+                glat = lat;
+                glng = lng;
+
+
+                addMaker2(lat, lng);
+                // reportLocation(lat,lng);
+
+
+            } else {
+                //alert('No');
+            }
+        });
+
+        map.mapTypes.set('Bird Map', styledMapType);
+        map.setMapTypeId('Bird Map');
+        map2.mapTypes.set('Bird Map', styledMapType);
+        map2.setMapTypeId('Bird Map');
+
+
+    }
+
+    function reportLocation(aa, bb, dd, tt) {
+
+
+        geocodeLatLng(geocoder, aa, bb, function (locationData) {
+
+            // add=locationData;
+            var pd = 'lat=' + aa + '&' + 'lng=' + bb + '&' + 'date=' + dd + '&' + 'type=' + tt + '&' + 'area=' + locationData;
+            // alert(pd);
+            $.ajax({
+                url: 'postData.php',
+                type: 'post',
+                data: pd,
+                success: function (data) {
+                    //alert(data);
+                    alert('report successful')
+
+                },
+                complete: function () {
+                    window.location.reload();
+
+                }
+
+            });
+        });
+
+
+    }
+
+    function check() {
+        if (window.confirm('Do you want to report this area?')) {
+            //alert("确定");
+            return true;
+        } else {
+            //alert("取消");
+            return false;
+        }
+    }
+
+
+    function getLocation() {
+        $('#loading').show();
+        infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Your current location.');
+                infoWindow.open(map);
+                map.setCenter(pos);
+                map.setZoom(16);
+                $('#loading').hide();
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+
+    }
+
+    $(function () {
+
+        $("#all").click(function () {
+            // alert(0);
+            clearMarkers();
+            $('#loading').show();
+            $.ajax({
+                url: 'getData.php',
+                type: 'post',
+                dataType: 'json',
+                data: 0,
+                success: function (data) {
+                    //alert(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        aa = data[i].lat;
+                        bb = data[i].lng;
+                        addMaker(aa, bb, data[i].type, data[i].date, data[i].area);
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+
+                }
+            });
+        });
+
+        //
+
+        $("#old").click(function () {
+            // alert(0);
+            clearMarkers();
+            $('#loading').show();
+            var pd = 'opt=Old';
+            $.ajax({
+                url: 'getData.php',
+                type: 'post',
+                dataType: 'json',
+                data: pd,
+                success: function (data) {
+                    //alert(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        aa = data[i].lat;
+                        bb = data[i].lng;
+                        addMaker(aa, bb, data[i].type, data[i].date, data[i].area);
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+                }
+            });
+        });
+
+        $("#kid").click(function () {
+            // alert(0);
+            clearMarkers();
+            $('#loading').show();
+            var pd = 'opt=Kid';
+            $.ajax({
+                url: 'getData.php',
+                type: 'post',
+                dataType: 'json',
+                data: pd,
+                success: function (data) {
+                    //alert(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        aa = data[i].lat;
+                        bb = data[i].lng;
+                        addMaker(aa, bb, data[i].type, data[i].date, data[i].area);
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+                }
+            });
+        });
+
+        $("#nest").click(function () {
+            // alert(0);
+            clearMarkers();
+            $('#loading').show();
+            var pd = 'opt=Nest';
+            $.ajax({
+                url: 'getData.php',
+                type: 'post',
+                dataType: 'json',
+                data: pd,
+                success: function (data) {
+                    //alert(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        aa = data[i].lat;
+                        bb = data[i].lng;
+                        addMaker(aa, bb, data[i].type, data[i].date, data[i].area);
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+                }
+            });
+        });
+
+        $("#week").click(function () {
+            // alert(0);
+            clearMarkers();
+            $('#loading').show();
+            var pd = 'opt=Week';
+            $.ajax({
+                url: 'getData.php',
+                type: 'post',
+                dataType: 'json',
+                data: pd,
+                success: function (data) {
+                    //alert(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        aa = data[i].lat;
+                        bb = data[i].lng;
+                        addMaker(aa, bb, data[i].type, data[i].date, data[i].area);
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+                }
+            });
+        });
+
+        $("#month").click(function () {
+            // alert(0);
+            clearMarkers();
+            $('#loading').show();
+            var pd = 'opt=Month';
+            $.ajax({
+                url: 'getData.php',
+                type: 'post',
+                dataType: 'json',
+                data: pd,
+                success: function (data) {
+                    //alert(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        aa = data[i].lat;
+                        bb = data[i].lng;
+                        addMaker(aa, bb, data[i].type, data[i].date, data[i].area);
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+                }
+            });
+        });
+
+        $("#year").click(function () {
+            // alert(0);
+            clearMarkers();
+            $('#loading').show();
+            var pd = 'opt=Year';
+            $.ajax({
+                url: 'getData.php',
+                type: 'post',
+                dataType: 'json',
+                data: pd,
+                success: function (data) {
+                    //alert(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        aa = data[i].lat;
+                        bb = data[i].lng;
+                        addMaker(aa, bb, data[i].type, data[i].date, data[i].area);
+                    }
+
+                },
+                complete: function () {
+                    $('#loading').hide();
+                    $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+                }
+            });
+        });
+
+        $('#btn1').click(function () {
+            $('html, body').animate({scrollTop: $('#select').offset().top}, 1000)
+        });
+    });
+
+    function addMaker(aa, bb, c, tp, area) {
+        var url = 'img/adult_pin_point.gif';
+        if (c == 'Old') {
+            url = 'img/adult_pin_point.gif';
+
+        }
+        if (c == 'Chick') {
+            url = 'img/chick_pin_point.gif'
+        }
+        if (c == 'Egg') {
+            url = 'img/egg_pin_point.gif'
+        }
+        var icon = {
+            url: url,
+            scaledSize: new google.maps.Size(45, 50),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 0)
+        };
+
+
+        var infowindow = new google.maps.InfoWindow({
+            content: area + " Location Report in " + tp
+        });
+
+        var point = new google.maps.LatLng(aa, bb);
+        //geocodeLatLng(geocoder,aa,bb);
+        var marker = new google.maps.Marker({
+            position: point,
+            map: map,
+            title: 'There are cute Hooded Plovers',
+            icon: icon
+        });
+
+        marker.addListener('click', function () {
+            infowindow.open(map, marker);
+        });
+        markers.push(marker);
+    }
+
+
+    function addMaker2(aa, bb) {
+        var url = 'img/report_point.gif';
+        var icon = {
+            url: url,
+            scaledSize: new google.maps.Size(20, 20),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 0)
+        };
+        var point = new google.maps.LatLng(aa, bb);
+        marker = new google.maps.Marker({
+            position: point,
+            map: map2,
+            title: 'Report this area!',
+            icon: icon
+        });
+        markers2.push(marker);
+    }
+
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    function clearMarkers2() {
+        setMapOnAll2(null);
+    }
+
+    function setMapOnAll2(map2) {
+        for (var i = 0; i < markers2.length; i++) {
+            markers2[i].setMap(map2);
+        }
+    }
+
+    var opt = 'none';
+    var dd = 'none';
+    var glat = 0;
+    var glng = 0;
+
+    dd = getNow();
+
+    function getNow() {
+        var now = new Date();
+        var nm = now.getMonth() + 1;
+        var nd = now.getDate();
+        var ny = now.getFullYear();
+
+        return ny + '-' + nm + '-' + nd;
+
+    }
+
+
+    /*$('input').on('input propertychange', function () {
+        dd = $(this).val();
+        // alert(dd);
+    });*/
+
+    $('#sharebtn').click(function () {
+
+        if (opt == 'none') {
+            alert('Please select a type of bird');
+        } else if (dd == 'none') {
+            alert('Please pick a date');
+        } else if (glat == 0 && glng == 0) {
+            alert('Please pick a location')
+        } else {
+            reportLocation(glat, glng, dd, opt);
+        }
+
+
+    });
+
+
+    window.onscroll = function () {
+        document.getElementById("shift2").className = "shift2a";
+
+    }
+
+    function GetDateStr(AddDayCount) {
+        var dd = new Date();
+        dd.setDate(dd.getDate() + AddDayCount);
+        var y = dd.getFullYear();
+        var m = dd.getMonth() + 1;
+        var d = dd.getDate();
+        return d + "/" + m + "/" + y;
+    }
+
+    // alert(year+"-"+month+"-"+strDate);
+
+    // $("#mm").attr("max", year + "-" + month + "-" + strDate);
+
+
+    $(function () {
+
+        $('#oldbird').click(function () {
+            opt = 'Old';
+            document.getElementById("oldbird").className = 'tt1';
+            $('#oldbird').attr('src', 'img/spottedAdultSelected.png');
+
+            document.getElementById("chickbird").className = 'chickbird';
+            $('#chickbird').attr('src', 'img/spottedChick.png');
+
+            document.getElementById("eggbird").className = 'eggbird';
+            $('#eggbird').attr('src', 'img/spottedNest.png');
+
+        });
+
+        $('#chickbird').click(function () {
+            opt = 'Chick';
+            document.getElementById("chickbird").className = 'tt2';
+            $('#chickbird').attr('src', 'img/spottedChickSelected.png');
+
+            document.getElementById("oldbird").className = 'oldbird';
+            $('#oldbird').attr('src', 'img/spottedAdult.png');
+
+            document.getElementById("eggbird").className = 'eggbird';
+            $('#eggbird').attr('src', 'img/spottedNest.png');
+
+        });
+
+        $('#eggbird').click(function () {
+            opt = 'Egg';
+            document.getElementById("eggbird").className = 'tt3';
+            $('#eggbird').attr('src', 'img/spottedNestSelected.png');
+
+            document.getElementById("oldbird").className = 'oldbird';
+            $('#oldbird').attr('src', 'img/spottedAdult.png');
+
+            document.getElementById("chickbird").className = 'chickbird';
+            $('#chickbird').attr('src', 'img/spottedChick.png');
+
+        });
+    });
+
+    var element = document.getElementById("myCalendar");
+    var myCalendar = jsCalendar.new(element, "now", {
+        "monthFormat": "month YYYY",
+        "dayFormat": "DDD"
+
+    });
+
+    myCalendar.max(GetDateStr(0));
+
+    // data-month-format="month YYYY" data-max="13/09/2018"
+
+    myCalendar.onDateClick(function (event, date) {
+
+        myCalendar.set(date);
+        var time = new Date(date);
+        var now = new Date();
+        var nm = now.getMonth() + 1;
+        var nd = now.getDate();
+        var ny = now.getFullYear();
+
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        var d = time.getDate();
+
+
+        if (y <= ny && m <= nm && d <= nd) {
+            dd = y + '-' + m + '-' + d;
+        }
+        console.log(dd);
+
+    });
+
+    function geocodeLatLng(geocoder, aa, bb, callback) {
+        var latlng = {lat: parseFloat(aa), lng: parseFloat(bb)};
+        if (geocoder) {
+            geocoder.geocode({'location': latlng}, function (results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        //console.log(results[0].formatted_address);
+                        callback(results[0].formatted_address);
+
+
+                    } else {
+                        //  console.log('No add');
+                        // window.add =('No results found');
+                        callback('No add');
+
+                    }
+                } else {
+                    // console.log('no');
+                    // window.add=('Geocoder failed due to: ' + status);
+                    callback('no add')
+
+                }
+            });
+        }
+
+    }
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHJTV5ch-y8n8PfWdpM5jjFdq9tP-DIJU&callback=initMap"
+        async defer></script>
+
+<script>
+
+
+</script>
+</body>
+</html>

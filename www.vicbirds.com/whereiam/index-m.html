@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Where I am - Vicbirds.com - Saving the Hooded Plovers</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <link rel="stylesheet" href="index-m.css" type="text/css">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/jsCalendar.css">
+    <script type="text/javascript" src="js/jsCalendar.js"></script>
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<header>
+    <nav>
+        <a href="http://www.vicbirds.com"> <img src="img/logoVB-copy.png"></a>
+
+    </nav>
+</header>
+<body>
+
+<div id="banner">
+    <p>Story continued..</p>
+    <p>Now You Know Who Am I.
+        Do You Wonder Where Do I Live?</p>
+    <p>You can click "Map" button to find our cute birds or you can click "Spot" to report the bird location if you see
+        them</p>
+    <a id="dmb">Map</a>
+    <a id="rlb">Spot</a>
+
+
+</div>
+
+<div id="map">
+
+
+</div>
+
+<div id="selection">
+    <p>1. Choose a type of the Hooded You have seen</p>
+    <div id="birdchoose">
+        <a id="old">Adult Birds</a>
+        <a id="chick">Chicks</a>
+        <a id="egg">Nests</a>
+    </div>
+</div>
+
+
+<div id="riqi">
+    <p>2. Choose a type of the Hooded You have seen</p>
+    <div id="rq">
+        <div id="myCalendar"></div>
+
+    </div>
+</div>
+<div id="shift"><p>3. Pick a location you have seen Hooded</p>
+
+
+</div>
+
+<div id="map2">
+</div>
+
+<div id="fn">
+    <a id="spot">Spot it!</a>
+    <a id="gtm">Go to the menu!</a>
+</div>
+
+<img id="loading" src="img/loading_gif.gif">
+<script>
+    var map, infoWindow, geocoder, map2;
+    var markers = [];
+    var markers2 = [];
+
+    function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to go to top';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Go to Menu';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function () {
+            $('html,body').animate({scrollTop: $('#banner').offset().top}, 1000);
+        });
+
+    }
+
+
+    function initMap() {
+
+
+        var styledMapType = new google.maps.StyledMapType(
+            [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#242f3e"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#746855"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#242f3e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.locality",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#263c3f"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#6b9a76"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#38414e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#212a37"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#9ca5b3"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#746855"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#1f2835"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#f3d19c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#2f3948"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#17263c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#515c6d"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#17263c"
+                        }
+                    ]
+                }
+            ], {name: 'Bird Map'}
+        )
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -38.667, lng: 143.604},
+            zoom: 11,
+            gestureHandling: 'greedy',
+            streetViewControl: false,
+            mapTypeControlOptions: {
+                mapTypeIds: ['Bird Map', 'satellite'
+                ]
+            }
+        });
+
+        map2 = new google.maps.Map(document.getElementById('map2'), {
+            center: {lat: -38.667, lng: 143.604},
+            zoom: 10,
+            mapTypeControlOptions: {
+                mapTypeIds: ['Bird Map', 'satellite'
+                ]
+            }
+        });
+
+
+        google.maps.event.addListener(map2, 'click', function (event) {
+            //alert(event.latLng);
+            clearMarkers2();
+            if (check() == true) {
+                //alert('Yes');
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
+                glat = lat;
+                glng = lng;
+
+
+                addMaker2(lat, lng);
+                // reportLocation(lat,lng);
+
+
+            } else {
+                //alert('No');
+            }
+        });
+
+        map.mapTypes.set('Bird Map', styledMapType);
+        map.setMapTypeId('Bird Map');
+        var centerControlDiv = document.createElement('div');
+        var centerControl = new CenterControl(centerControlDiv, map);
+
+        centerControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(centerControlDiv);
+        map2.mapTypes.set('Bird Map', styledMapType);
+        map2.setMapTypeId('Bird Map');
+
+
+    }
+
+    function reportLocation(aa, bb, dd, tt) {
+        var pd = 'lat=' + aa + '&' + 'lng=' + bb + '&' + 'date=' + dd + '&' + 'type=' + tt;
+        // alert(pd);
+        $.ajax({
+            url: 'postData.php',
+            type: 'post',
+            data: pd,
+            success: function (data) {
+                //alert(data);
+                alert('report successful')
+
+            },
+            complete: function () {
+                window.location.reload();
+
+            }
+
+        });
+
+    }
+
+    function check() {
+        if (window.confirm('Do you want to report this area?')) {
+            //alert("确定");
+            return true;
+        } else {
+            //alert("取消");
+            return false;
+        }
+    }
+
+
+    function getLocation() {
+        $('#loading').show();
+        infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Your current location.');
+                infoWindow.open(map);
+                map.setCenter(pos);
+                map.setZoom(16);
+                $('#loading').hide();
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+
+    }
+
+
+    $("#dmb").click(function () {
+        // alert(0);
+        clearMarkers();
+        $('#loading').show();
+        $.ajax({
+            url: 'getData.php',
+            type: 'post',
+            dataType: 'json',
+            data: 0,
+            success: function (data) {
+                //alert(data.length);
+                for (var i = 0; i < data.length; i++) {
+                    aa = data[i].lat;
+                    bb = data[i].lng;
+                    addMaker(aa, bb, data[i].type);
+                }
+
+            },
+            complete: function () {
+                $('#loading').hide();
+                $('html, body').animate({scrollTop: $('#map').offset().top}, 1000)
+
+            }
+        });
+    });
+
+
+    function addMaker(aa, bb, c) {
+        var url = 'img/adult_pin_point.gif';
+        if (c == 'Old') {
+            url = 'img/adult_pin_point.gif';
+
+        }
+        if (c == 'Chick') {
+            url = 'img/chick_pin_point.gif'
+        }
+        if (c == 'Egg') {
+            url = 'img/egg_pin_point.gif'
+        }
+        var icon = {
+            url: url,
+            scaledSize: new google.maps.Size(45, 50),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 0)
+        };
+        var point = new google.maps.LatLng(aa, bb);
+        marker = new google.maps.Marker({
+            position: point,
+            map: map,
+            title: 'There are some cute hood plovers!',
+            icon: icon
+        });
+        markers.push(marker);
+    }
+
+
+    function addMaker2(aa, bb) {
+        var url = 'img/report_point.gif';
+        var icon = {
+            url: url,
+            scaledSize: new google.maps.Size(20, 20),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 0)
+        };
+        var point = new google.maps.LatLng(aa, bb);
+        marker = new google.maps.Marker({
+            position: point,
+            map: map2,
+            title: 'Report this area!',
+            icon: icon
+        });
+        markers2.push(marker);
+    }
+
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    function clearMarkers2() {
+        setMapOnAll2(null);
+    }
+
+    function setMapOnAll2(map2) {
+        for (var i = 0; i < markers2.length; i++) {
+            markers2[i].setMap(map2);
+        }
+    }
+
+
+    var opt = 'none';
+    var dd = 'none';
+    var glat = 0;
+    var glng = 0;
+
+    dd = getNow();
+
+    function getNow() {
+        var now = new Date();
+        var nm = now.getMonth() + 1;
+        var nd = now.getDate();
+        var ny = now.getFullYear();
+
+        return ny + '-' + nm + '-' + nd;
+
+    }
+
+
+    /* $('input').on('input propertychange', function () {
+         dd = $(this).val();
+         // alert(dd);
+     });*/
+
+
+    $('#spot').click(function () {
+
+        if (opt == 'none') {
+            alert('Please select a type of bird');
+            $('html, body').animate({scrollTop: $('#selection').offset().top}, 1000);
+        } else if (dd == 'none') {
+            alert('Please pick a date');
+            $('html, body').animate({scrollTop: $('#rq').offset().top}, 1000);
+        } else if (glat == 0 && glng == 0) {
+            alert('Please pick a location')
+            $('html, body').animate({scrollTop: $('#map2').offset().top}, 1000);
+        } else {
+            reportLocation(glat, glng, dd, opt);
+        }
+
+
+    });
+
+    $('#gtm').click(function () {
+
+        $('html, body').animate({scrollTop: $('#banner').offset().top}, 1000);
+    });
+
+
+    function GetDateStr(AddDayCount) {
+        var dd = new Date();
+        dd.setDate(dd.getDate() + AddDayCount);
+        var y = dd.getFullYear();
+        var m = dd.getMonth() + 1;
+        var d = dd.getDate();
+        return d + "/" + m + "/" + y;
+    }
+
+    // alert(year+"-"+month+"-"+strDate);
+
+    // $("#mm").attr("max", year + "-" + month + "-" + strDate);
+
+
+    $(function () {
+
+        $('#old').click(function () {
+            opt = 'Old';
+            $('html, body').animate({scrollTop: $('#riqi').offset().top}, 1000)
+
+
+        });
+
+        $('#chick').click(function () {
+            opt = 'Chick';
+
+            $('html, body').animate({scrollTop: $('#riqi').offset().top}, 1000)
+
+
+        });
+
+        $('#egg').click(function () {
+            opt = 'Egg';
+            $('html, body').animate({scrollTop: $('#riqi').offset().top}, 1000)
+
+        });
+        $('#rlb').click(function () {
+            $('html, body').animate({scrollTop: $('#selection').offset().top}, 1000)
+
+        });
+    });
+
+    var element = document.getElementById("myCalendar");
+    var myCalendar = jsCalendar.new(element, "now", {
+        "monthFormat": "month YYYY",
+        "dayFormat": "DDD"
+
+    });
+
+    myCalendar.max(GetDateStr(0));
+
+    // data-month-format="month YYYY" data-max="13/09/2018"
+
+    myCalendar.onDateClick(function (event, date) {
+
+        myCalendar.set(date);
+        var time = new Date(date);
+        var now = new Date();
+        var nm = now.getMonth() + 1;
+        var nd = now.getDate();
+        var ny = now.getFullYear();
+
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        var d = time.getDate();
+
+
+        if (y <= ny && m <= nm && d <= nd) {
+            dd = y + '-' + m + '-' + d;
+            $('html, body').animate({scrollTop: $('#shift').offset().top}, 1000)
+        }
+
+
+        console.log(dd);
+
+    });
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHJTV5ch-y8n8PfWdpM5jjFdq9tP-DIJU&callback=initMap"
+        async defer></script>
+
+</body>
+</html>

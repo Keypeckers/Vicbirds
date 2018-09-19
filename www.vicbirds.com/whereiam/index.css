@@ -1,0 +1,345 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+
+nav {
+    height: 80px;
+    width: 100%;
+    background: black;
+}
+
+nav img {
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+
+}
+
+.gmnoprint a, .gmnoprint span {
+    display: none;
+}
+
+.gmnoprint div {
+    /* opacity: 0.5;
+     display: none;*/
+
+}
+
+a[href^="http://maps.google.com/maps"] {
+    display: none !important
+}
+
+a[href^="https://maps.google.com/maps"] {
+    display: none !important
+}
+
+img[src="http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png"], a[href^="http://maps.google.com/maps"] {
+    display: none !important;
+}
+
+#loading {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-top: -75px;
+    margin-left: -75px;
+    display: none;
+    z-index: 99;
+}
+
+#banner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+}
+
+#banner img {
+    min-height: 965px;
+    align: middle;
+}
+
+#banner_content {
+    height: 600px;
+    width: 500px;
+    position: absolute;
+    margin-top: 15%;
+    margin-left: 15%;
+}
+
+#banner img {
+    -webkit-filter: brightness(50%);
+
+}
+
+#back {
+    position: absolute;
+}
+
+#banner_content p {
+    color: white;
+    opacity: 0.7;
+}
+
+#banner_content h1 {
+    color: white;
+}
+
+#shift1 {
+    width: 100%;
+    height: 120px;
+    background: #414141;
+    margin-top: -20px;
+    display: flex;
+    justify-content: center;
+}
+
+.shift2 {
+    display: none;
+}
+
+#shift1 p {
+    margin-top: 40px;
+    color: orange;
+    font-size: 26px;
+}
+
+#select {
+    width: 100%;
+    height: 838px;
+    background: url("img/greendboard-3.png");
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#youwanttosee {
+    margin-left: 30px;
+    height: 87px;
+    width: 500px;
+    margin-bottom: 30px;
+}
+
+#select table {
+    margin-left: 15%;
+    display: flex;
+
+}
+
+#all:hover {
+    content: url('img/myWholeFamilyHover.png');
+    cursor: pointer;
+}
+
+#kid:hover {
+    content: url('img/OurKidOnlyHover.png');
+    cursor: pointer;
+}
+
+#old:hover {
+    content: url('img/oldMenOnlyHover.png');
+    cursor: pointer;
+}
+
+#nest:hover {
+    content: url('img/OurNestOnlyHover.png');
+    cursor: pointer;
+}
+
+#week:hover {
+    content: url('img/newSpottedThisWeekHover.png');
+    cursor: pointer;
+}
+
+#month:hover {
+    content: url('img/newSpottedThisMonthHover.png');
+    cursor: pointer;
+}
+
+#year:hover {
+    content: url('img/newSpottedThisYearHover.png');
+    cursor: pointer;
+}
+
+footer {
+    height: 120px;
+    background: black;
+}
+
+#btn1 {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    background: #c1a238;
+    border-radius: 10px;
+    font-weight: bolder;
+    transition: border-radius .5s;
+}
+
+#btn1:hover {
+    border-radius: 40px;
+    color: #fff;
+    background: #c07512;
+    transition: border-radius .5s;
+}
+
+#shift3 {
+    height: 150px;
+    width: 100%;
+    background: url("img/share_wood_texture_bg-1000.png") center;
+    display: flex;
+    justify-content: center;
+}
+
+#sustext {
+    border: 1px solid gray;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 80px;
+    margin-top: 30px;
+    min-width: 600px;
+}
+
+#sustext p {
+    color: white;
+    opacity: 1.0;
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+#hoodchoose {
+    text-align: center;
+}
+
+#hoodchoose p {
+    font-size: 22px;
+
+}
+
+#hc img {
+    padding: 2px;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 320px;
+    width: 300px;
+}
+
+.oldbird:hover {
+    content: url('img/spottedAdultHover.png');
+    padding: 0px;
+}
+
+.chickbird:hover {
+    content: url('img/spottedChickHover.png');
+    padding: 0px;
+}
+
+.eggbird:hover {
+    content: url('img/spottedNestHover.png');
+    padding: 0px;
+}
+
+#mapanddate {
+    width: 100%;
+    height: 500px;
+    display: flex;
+
+}
+
+#reportarea {
+    background: url("img/Coast_Night_BG.jpg");
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    overflow: hidden;
+    margin: 0px;
+}
+
+#map2 {
+    width: 800px;
+    height: 500px;
+
+}
+
+#wdsf {
+    margin-left: 30px;
+    width: 300px;
+    height: 300px;
+}
+
+#wds {
+    width: 100%;
+
+}
+
+#date p {
+    font-size: 22px;
+
+}
+
+#date {
+    margin-left: 10px;
+}
+
+#mapanddate {
+    background: url("img/sand-clock-BG.png");
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    overflow: hidden;
+    margin: 0px;
+}
+
+#whensee {
+    margin-left: 30px;
+    width: 300px;
+    height: 300px;
+    margin-bottom: -50px;
+}
+
+#whensee img {
+    width: 100%;
+
+}
+
+#mm {
+    width: 200px;
+    height: 30px;
+}
+
+#fsharebtn {
+    width: 300px;
+    margin-left: 20px;
+    padding: 2px;
+}
+
+#sharebtn {
+    height: 100%;
+    width: 100%;
+}
+
+#sharebtn:hover {
+    content: url('img/confirmShareHover.png');
+    padding: 0px;
+}
