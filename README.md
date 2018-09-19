@@ -1,6 +1,8 @@
 # Vicbirds
 This is a animal protection project run by Keypeckers
 
+Team members: Ken, Viet, Jason, Vicky
+
 Our Topic: Saving Hooded Plover
 
 Our Focus:Hooded Plover in the area of Lorne to Princetown 
