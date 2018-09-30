@@ -27,6 +27,7 @@
  * 
  */
 
+
 /* Black Theme */
 .jsCalendar.black-theme table {
     color: #cccccc;
@@ -77,6 +78,7 @@
     background: #505050;
 }
 
+
 /* Grey Theme */
 .jsCalendar.grey-theme table {
     color: #242529; /*OK*/
@@ -126,6 +128,7 @@
 .jsCalendar.grey-theme *::selection {
     background: #b0b4bd; /*OK*/
 }
+
 
 /* White Theme */
 .jsCalendar.white-theme table {

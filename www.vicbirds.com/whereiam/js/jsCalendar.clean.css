@@ -27,6 +27,7 @@
  * 
  */
 
+
 /* Clean Theme */
 .jsCalendar.clean-theme table {
     color: #000000;
@@ -125,7 +126,6 @@
 .jsCalendar.blue *::-moz-selection {
     background: #83d8ff;
 }
-
 /* Yellow */
 .jsCalendar.clean-theme.yellow tbody td:hover {
     background-color: rgba(255, 227, 27, 0.3);
@@ -146,7 +146,6 @@
 .jsCalendar.yellow *::-moz-selection {
     background: #FDE74C;
 }
-
 /* Orange */
 .jsCalendar.clean-theme.orange tbody td:hover {
     background-color: rgba(255, 180, 0, 0.3);
@@ -167,7 +166,6 @@
 .jsCalendar.clean-theme.orange *::-moz-selection {
     background: #FFB400;
 }
-
 /* Red */
 .jsCalendar.clean-theme.red tbody td:hover {
     background-color: rgba(246, 81, 29, 0.3);
@@ -188,7 +186,6 @@
 .jsCalendar.clean-theme.red *::-moz-selection {
     background: #F6511D;
 }
-
 /* Green */
 .jsCalendar.clean-theme.green tbody td:hover {
     background-color: rgba(127, 184, 0, 0.3);

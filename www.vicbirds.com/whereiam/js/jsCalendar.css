@@ -26,6 +26,7 @@
  * 
  */
 
+
 /* Default Theme */
 /* General style */
 .jsCalendar * {
@@ -226,6 +227,7 @@
     background: #7FB800;
 }
 
+
 /* Material Theme */
 /* Blue default */
 .jsCalendar.material-theme table {
@@ -318,6 +320,8 @@
 .jsCalendar.material-theme.green thead .jsCalendar-nav-right:hover {
     background-color: #639000;
 }
+
+
 
 /* Classic Theme */
 /* Blue default */

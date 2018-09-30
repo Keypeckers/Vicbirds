@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0">
     <link rel="stylesheet" href="index.css" type="text/css">
     <link rel="stylesheet" href="index-animitions.css" type="text/css">
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="js/jsCalendar.css">
     <script type="text/javascript" src="js/jsCalendar.js"></script>
     <meta charset="utf-8">
@@ -42,6 +42,7 @@
     <nav>
         <a href="http://www.vicbirds.com"> <img src="img/logoVB-copy.png"></a>
 
+        <div id="navs"><a href="#select">Map</a><a href="#shift3">Report</a></div>
     </nav>
 </header>
 <body>
@@ -395,6 +396,39 @@
         map.setMapTypeId('Bird Map');
         map2.mapTypes.set('Bird Map', styledMapType);
         map2.setMapTypeId('Bird Map');
+
+
+        var locationinfoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+
+                locationinfoWindow.setPosition(pos);
+                locationinfoWindow.setContent('Your current location');
+                locationinfoWindow.open(map2);
+                map2.setCenter(pos);
+                map2.setZoom(16);
+            }, function () {
+                handleLocationError(true, locationinfoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, locationinfoWindow, map.getCenter());
+        }
+
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+            infoWindow.open(map);
+        }
 
 
     }
@@ -815,6 +849,7 @@
             document.getElementById("eggbird").className = 'eggbird';
             $('#eggbird').attr('src', 'img/spottedNest.png');
 
+            $('html, body').animate({scrollTop: $('#map2').offset().top}, 1000)
         });
 
         $('#chickbird').click(function () {
@@ -828,6 +863,7 @@
             document.getElementById("eggbird").className = 'eggbird';
             $('#eggbird').attr('src', 'img/spottedNest.png');
 
+            $('html, body').animate({scrollTop: $('#map2').offset().top}, 1000)
         });
 
         $('#eggbird').click(function () {
@@ -841,6 +877,7 @@
             document.getElementById("chickbird").className = 'chickbird';
             $('#chickbird').attr('src', 'img/spottedChick.png');
 
+            $('html, body').animate({scrollTop: $('#map2').offset().top}, 1000)
         });
     });
 

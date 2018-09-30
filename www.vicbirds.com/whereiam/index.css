@@ -7,6 +7,28 @@ nav {
     height: 80px;
     width: 100%;
     background: black;
+    display: flex;
+}
+
+#navs {
+    display: flex;
+
+    height: 100%;
+
+}
+
+#navs a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 22px;
+    margin-left: 20px;
+
+    line-height: 80px;
+}
+
+#navs a:hover {
+    color: #ff7507;
 }
 
 nav img {
@@ -19,7 +41,6 @@ nav img {
 .gmnoprint a, .gmnoprint span {
     display: none;
 }
-
 .gmnoprint div {
     /* opacity: 0.5;
      display: none;*/
